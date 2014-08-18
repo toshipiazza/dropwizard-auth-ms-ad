@@ -47,12 +47,12 @@ Several additional properties can be configured, but sensible defaults should pr
 
 ## OK, that's cool, how about...
 
-* ... using another cool LDAP library?
-...* Great idea, but for this project we do not think we should need more than the standard JRE support
-* ... configuring the required group at the Resource level?
-...* Wonderful idea. If you get to it before us, please be sure to contribute your work.
+* ...using another cool LDAP library?
+* Great idea, but for this project we do not think we should need more than the standard JRE support
+* ...configuring the required group at the Resource level?
+* Wonderful idea. If you get to it before us, please be sure to contribute your work.
 * ...using nested groups in AD
-...* Right on! But it seems that resolving even the known groups from the memberOf attribute is very slow. Change the *groupResolutionMode* to 2 and see how slow.
+* Right on! But it seems that resolving even the known groups from the memberOf attribute is very slow. Change the *groupResolutionMode* to 2 and see how slow.
 
 
 
