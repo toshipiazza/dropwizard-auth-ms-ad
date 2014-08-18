@@ -3,6 +3,11 @@ This BasicAuth provider uses the ActiveDirectory LDAP interface to authenticate 
 Existing LDAP providers can provide you the same capabilities as this Authenticator but this authenticator should require
 much less configuration and can take advantage of typical behaviors used in activeDirectory deployments.
 
+## Before you continue
+This project is only in use for internal projects at CommerceHub. You should be familiar with the auth section of the DropWizard manual.
+You should consult your IT administrator before you bury her carefully size AD cluster with new auth requests. You *SHOULD* cache your
+interactions with AD; DropWizard provides CachingAuthenticator to help you with this.
+
 ## Maven (etc.)
 Currently this module is in alpha and not available from any public maven repository. We will publish to to JCenter soon.
 
@@ -11,8 +16,11 @@ Example usage
 
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) throws ClassNotFoundException {
+        ...
         environment.jersey().register(new BasicAuthProvider<>(AdAuthenticator.createDefault(configuration.getAdConfiguration()), "MSAD"));
+        ...
         environment.jersey().register(new ProtectedResource());
+
     }
 
 ## Configuration
