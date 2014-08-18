@@ -49,7 +49,7 @@ publishing {
     }
 }
 
-/*
+
 apply plugin: "bintray"
 apply plugin: "release"
 
@@ -69,4 +69,3 @@ bintray {
 bintrayUpload.dependsOn build, sourceJar, javadocJar
 
 createReleaseTag.dependsOn bintrayUpload
-*/

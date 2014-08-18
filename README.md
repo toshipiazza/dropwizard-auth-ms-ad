@@ -24,7 +24,7 @@ Example usage
     }
 
 ## Configuration
-The aim of this project is to minimize the amount of required configuration. The only REQUIRED configuration variable if *domain*
+The aim of this project is to minimize the amount of required configuration. The only REQUIRED configuration variable is *domain*
 
     ad:
         domain: my.company.example.com
