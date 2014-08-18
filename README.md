@@ -61,6 +61,9 @@ Several additional properties can be configured, but sensible defaults should pr
 * Wonderful idea. If you get to it before us, please be sure to contribute your work.
 * ...using nested groups in AD
 * Right on! But it seems that resolving even the known groups from the memberOf attribute is very slow. Change the *groupResolutionMode* to 2 and see how slow.
+* ...AD has this really cool feature that allows you to do X with Y!
+* meh.
+
 
 
 
