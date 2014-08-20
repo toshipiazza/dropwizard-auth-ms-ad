@@ -11,7 +11,7 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import java.util.*;
 
-public class LookupGroupResoloverStrategy implements GroupResoloverStrategy {
+public class LookupGroupResolverStrategy implements GroupResoloverStrategy {
 
     private static final Logger LOG = LoggerFactory.getLogger(LookupGroupResoloverStrategy.class);
 

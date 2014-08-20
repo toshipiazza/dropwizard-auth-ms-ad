@@ -4,7 +4,7 @@ import javax.naming.directory.DirContext;
 import java.util.Collection;
 import java.util.Set;
 
-public interface GroupResoloverStrategy {
+public interface GroupResolverStrategy {
 
     public Set<String> resolveGroups(DirContext boundContext, Collection<String> groupDns);
 
