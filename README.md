@@ -1,4 +1,4 @@
-# DropWizard ActiveDirectory Authentication Provider [![Build Status](https://travis-ci.org/commercehub-oss/sensu-java-api.svg?branch=master)](https://travis-ci.org/commercehub-oss/sensu-java-api)
+# DropWizard ActiveDirectory Authentication Provider [![Build Status](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad.svg?branch=master)](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad)
 This BasicAuth provider uses the ActiveDirectory LDAP interface to authenticate and authorize your service principals.
 Existing LDAP providers can provide you the same capabilities as this Authenticator but this authenticator should require
 much less configuration and can take advantage of typical behaviors used in activeDirectory deployments.
