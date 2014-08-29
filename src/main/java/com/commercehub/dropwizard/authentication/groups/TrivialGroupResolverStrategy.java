@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TrivialGroupResolverStrategy implements GroupResoloverStrategy {
+public class TrivialGroupResolverStrategy implements GroupResolverStrategy {
     @Override
     public Set<String> resolveGroups(DirContext boundContext, Collection<String> groupDns) {
         Set<String> result = new HashSet<>();

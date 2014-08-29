@@ -1,8 +1,8 @@
 package com.commercehub.dropwizard.authentication;
 
-import com.commercehub.dropwizard.authentication.groups.LookupGroupResoloverStrategy;
-import com.commercehub.dropwizard.authentication.groups.NoOpGroupResoloverStrategy;
-import com.commercehub.dropwizard.authentication.groups.TrivialGroupResoloverStrategy;
+import com.commercehub.dropwizard.authentication.groups.LookupGroupResolverStrategy;
+import com.commercehub.dropwizard.authentication.groups.NoOpGroupResolverStrategy;
+import com.commercehub.dropwizard.authentication.groups.TrivialGroupResolverStrategy;
 import com.google.common.base.Optional;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
@@ -17,9 +17,6 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -51,7 +48,6 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
                 Set<String> missingGroups = configuration.getRequiredGroups();
                 missingGroups.removeAll(principal.getGroupNames());
                 LOG.warn(String.format("%s authenticated successfully but did not have authority. Missing Groups: %s", credentials.getUsername(), missingGroups.toString()));
-                throw new WebApplicationException(Response.status(Response.Status.FORBIDDEN).entity("You are not authorized.").type(MediaType.TEXT_PLAIN_TYPE).build());
             }
         }
         return Optional.absent();
@@ -88,11 +84,11 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
     private Set<String> resolveGroupNames(DirContext boundContext, Set<String> groupDNs){
         switch(configuration.getGroupResolutionMode()){
             case AdConfiguration.NOOP_GROUP_RESOLV:
-                return new NoOpGroupResoloverStrategy().resolveGroups(boundContext, groupDNs);
+                return new NoOpGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
             case AdConfiguration.TRIVIAL_GROUP_RESOLV:
-                return new TrivialGroupResoloverStrategy().resolveGroups(boundContext, groupDNs);
+                return new TrivialGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
             case AdConfiguration.LOOKUP_GROUP_RESOLV:
-                return new LookupGroupResoloverStrategy().resolveGroups(boundContext, groupDNs);
+                return new LookupGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
             default:
                 throw new RuntimeException("No matching group resolution strategy found");
         }

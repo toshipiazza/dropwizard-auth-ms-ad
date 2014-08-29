@@ -11,9 +11,9 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import java.util.*;
 
-public class LookupGroupResolverStrategy implements GroupResoloverStrategy {
+public class LookupGroupResolverStrategy implements GroupResolverStrategy {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LookupGroupResoloverStrategy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LookupGroupResolverStrategy.class);
 
     @Override
     public Set<String> resolveGroups(DirContext boundContext, Collection<String> groupDns) {
