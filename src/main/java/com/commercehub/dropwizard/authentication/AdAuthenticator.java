@@ -106,7 +106,11 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
         Properties properties = new Properties();
         properties.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         properties.put(Context.PROVIDER_URL, configuration.getLdapUrl());
-        properties.put(Context.SECURITY_PRINCIPAL, String.format("%s@%s", credentials.getUsername(), configuration.getDomain()));
+        if(credentials.getUsername().contains("@")){
+            properties.put(Context.SECURITY_PRINCIPAL, credentials.getUsername());
+        }else{
+            properties.put(Context.SECURITY_PRINCIPAL, String.format("%s@%s", credentials.getUsername(), configuration.getDomain()));
+        }
         properties.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
         properties.put(Context.REFERRAL, configuration.getGroupResolutionMode()==AdConfiguration.LOOKUP_GROUP_RESOLV?"follow":"ignore");
         try {
