@@ -9,6 +9,7 @@ buildscript {
 }
 
 apply plugin: "java"
+apply plugin: "groovy"
 apply plugin: "idea"
 apply plugin: "maven"
 apply plugin: "maven-publish"
@@ -20,6 +21,7 @@ repositories {
 dependencies {
     compile "io.dropwizard:dropwizard-auth:0.7.0"
     compile "io.dropwizard:dropwizard-testing:0.7.0"
+    testCompile "org.codehaus.groovy:groovy:2.3.3"
 }
 
 sourceCompatibility = "1.7"
