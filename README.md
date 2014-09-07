@@ -36,7 +36,7 @@ Several additional properties can be configured, but sensible defaults should pr
         domainController: my-fav-dc.my.company.example.com # Default: <domain>
         sslEnabled: true  # Default: true
         groupResolutionMode: 1 # 0(DN) , 1(CN), or 2(sAMAccountName - EXPENSIVE). Default: 1
-        usernameFilterTemplate: (&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=${username})) # Default: <As shown>
+        usernameFilterTemplate: (&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s)) # Default: <As shown> %s replaced with the sAMAccountName
         attributeNames: # Default: <As Shown>. first two are required.
             - sAMAccountName
             - memberOf
