@@ -12,13 +12,6 @@ public class CaseInsensitiveHashMap<V> extends HashMap<String, V> {
         super();
     }
 
-    public CaseInsensitiveHashMap(Map<String, V> m) {
-        super();
-        for(Entry<String, V> entry: m.entrySet()){
-            put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public V put(String key, V value) {
         return super.put(key.toLowerCase(), value);
