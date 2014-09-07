@@ -1,10 +1,12 @@
-package com.commercehub.dropwizard.authentication;
+package com.commercehub.dropwizard.authentication
 
+import io.dropwizard.auth.basic.BasicCredentials;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotEquals
+import static org.junit.Assert.assertTrue;
 
 public class AdCredentialsTest {
 
@@ -35,6 +37,22 @@ public class AdCredentialsTest {
         assertNotEquals("The sAMAccountName should not be exact match for username", cred.username, cred.sAMAccountName);
         assertEquals("The sAMAccountName should be match for unqualified username", unqualifiedUsername, cred.sAMAccountName);
         assertEquals("The call to getUserPrincipalName should use the default domain", String.format("%s@%s", unqualifiedUsername, defaultDomain), cred.getUserPrincipalName(defaultDomain) )
+    }
+
+    @Test void basicCredConversion(){
+        String unqualifiedUsername = RandomStringUtils.randomAlphanumeric(15)
+        def ac1 = AdCredentials.fromBasicCredentials(new BasicCredentials(unqualifiedUsername, "hogan"))
+        def ac2 = AdCredentials.fromBasicCredentials(new BasicCredentials("$unqualifiedUsername@$defaultDomain" as String, "hogan"))
+        def ac3 = AdCredentials.fromBasicCredentials(new BasicCredentials("$defaultDomainAlias\\$unqualifiedUsername" as String, "hogan"))
+
+        [ac1, ac2, ac3].each{
+            assertEquals("sAMAccountName should match the original unqualified username", unqualifiedUsername, it.sAMAccountName)
+            assertEquals("The call to getUserPrincipalName should use the default domain", String.format("%s@%s", unqualifiedUsername, defaultDomain), it.getUserPrincipalName(defaultDomain) )
+        }
+
+        def ac4 = AdCredentials.fromBasicCredentials(ac3)
+        assertTrue("When asked for and AdCredential from and existing AdCredential return that instance", ac4.is(ac3) && ac3.is(ac4))
+
     }
 
 }

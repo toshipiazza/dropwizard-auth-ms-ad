@@ -36,7 +36,7 @@ public class AdConfiguration {
 
     @NotNull
     @Valid
-    private String usernameFilterTemplate = "(&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=${username}))";
+    private String usernameFilterTemplate = "(&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s))";
     private int groupResolutionMode = TRIVIAL_GROUP_RESOLV;
     private String[] attributeNames = new String[]{"sAMAccountName", "mail", "memberOf"};
     private boolean sslEnabled = true;

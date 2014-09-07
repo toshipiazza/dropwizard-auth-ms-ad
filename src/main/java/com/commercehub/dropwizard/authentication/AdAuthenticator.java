@@ -39,6 +39,11 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
 
     @Override
     public Optional<T> authenticate(BasicCredentials credentials) throws AuthenticationException {
+        return doAuthenticate(AdCredentials.fromBasicCredentials(credentials));
+    }
+
+    private Optional<T> doAuthenticate(AdCredentials credentials) throws AuthenticationException {
+
         DirContext boundContext = bindUser(credentials);
         if(boundContext!=null){
             AdPrincipal principal = getAdPrincipal(boundContext, credentials);
@@ -62,12 +67,12 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
     }
 
 
-    private AdPrincipal getAdPrincipal(DirContext boundContext, BasicCredentials credentials) throws AuthenticationException {
+    private AdPrincipal getAdPrincipal(DirContext boundContext, AdCredentials credentials) throws AuthenticationException {
         try {
             SearchControls searchCtls = new SearchControls();
             searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             searchCtls.setReturningAttributes(configuration.getAttributeNames());
-            NamingEnumeration<SearchResult> results = boundContext.search(configuration.getDomainBase(), createUsernameFilter(credentials), searchCtls);
+            NamingEnumeration<SearchResult> results = boundContext.search(configuration.getDomainBase(), String.format(configuration.getUsernameFilterTemplate(), credentials.getsAMAccountName()), searchCtls);
             SearchResult userResult = results.hasMoreElements() ? results.next() : null;
 
             if(userResult==null || results.hasMoreElements()){
@@ -96,24 +101,16 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
     }
 
 
-    private String createUsernameFilter(BasicCredentials credentials) {
-        Map<String, String> values  = new HashMap<String, String>();
-        values.put("username", credentials.getUsername());
-        return AdUtilities.expandTemplate(configuration.getUsernameFilterTemplate(), values);
-    }
 
-    private DirContext bindUser(BasicCredentials credentials) throws AuthenticationException{
+
+    private DirContext bindUser(AdCredentials credentials) throws AuthenticationException{
         Properties properties = new Properties();
         properties.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         //See: http://docs.oracle.com/javase/jndi/tutorial/ldap/connect/create.html#TIMEOUT
         properties.put("com.sun.jndi.ldap.read.timeout", configuration.getReadTimeout()+"");  // How long to wait for a read response
         properties.put("com.sun.jndi.ldap.connect.timeout", configuration.getConnectionTimeout()+"");  // How long to wait for a network connection
         properties.put(Context.PROVIDER_URL, configuration.getLdapUrl());
-        if(credentials.getUsername().contains("@")){
-            properties.put(Context.SECURITY_PRINCIPAL, credentials.getUsername());
-        }else{
-            properties.put(Context.SECURITY_PRINCIPAL, String.format("%s@%s", credentials.getUsername(), configuration.getDomain()));
-        }
+        properties.put(Context.SECURITY_PRINCIPAL, credentials.getUserPrincipalName(configuration.getDomain()));
         properties.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
         properties.put(Context.REFERRAL, configuration.getGroupResolutionMode()==AdConfiguration.LOOKUP_GROUP_RESOLV?"follow":"ignore");
         try {

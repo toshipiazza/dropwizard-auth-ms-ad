@@ -28,4 +28,8 @@ public class AdCredentials extends BasicCredentials {
     public String getUserPrincipalName(String defaultDomain) {
         return getUsername().contains("@") ? getUsername() : String.format("%s@%s", sAMAccountName, defaultDomain);
     }
+
+    public static AdCredentials fromBasicCredentials(BasicCredentials credentials) {
+        return (credentials instanceof AdCredentials) ? (AdCredentials) credentials : new AdCredentials(credentials.getUsername(), credentials.getPassword());
+    }
 }
