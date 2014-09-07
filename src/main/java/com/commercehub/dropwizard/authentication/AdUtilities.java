@@ -58,6 +58,9 @@ public class AdUtilities {
     }
 
     public static String extractDNParticle(String dn, String particle){
+        if(dn.indexOf(particle+"=")<0){
+            return null;
+        }
         String temp = dn.substring(dn.indexOf(particle + "=") + (particle.length()+1));
         return (temp.indexOf(",") > 0 ? temp.substring(0, temp.indexOf(",")) : temp).trim();
     }
@@ -65,7 +68,10 @@ public class AdUtilities {
     public static Set<String> extractDNParticles(Collection<String> dnStrings, String particle){
         Set<String> result = new HashSet<>();
         for(String dn: dnStrings){
-            result.add(extractDNParticle(dn, particle));
+            String value = extractDNParticle(dn, particle);
+            if(null!=value){
+                result.add(value);
+            }
         }
         return result;
     }
