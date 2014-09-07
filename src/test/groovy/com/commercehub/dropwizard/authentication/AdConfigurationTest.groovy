@@ -3,7 +3,6 @@ package com.commercehub.dropwizard.authentication
 import org.junit.Test
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 /**
  * Created by ghogan on 9/6/14.
  */
