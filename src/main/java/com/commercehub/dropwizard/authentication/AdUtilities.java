@@ -6,6 +6,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,4 +57,16 @@ public class AdUtilities {
         return result;
     }
 
+    public static String extractDNParticle(String dn, String particle){
+        String temp = dn.substring(dn.indexOf(particle + "=") + (particle.length()+1));
+        return (temp.indexOf(",") > 0 ? temp.substring(0, temp.indexOf(",")) : temp).trim();
+    }
+
+    public static Set<String> extractDNParticles(Collection<String> dnStrings, String particle){
+        Set<String> result = new HashSet<>();
+        for(String dn: dnStrings){
+            result.add(extractDNParticle(dn, particle));
+        }
+        return result;
+    }
 }

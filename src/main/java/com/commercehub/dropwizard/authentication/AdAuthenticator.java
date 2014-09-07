@@ -79,13 +79,16 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
             }
 
             Map<String, Object> attributes = AdUtilities.simplify(userResult.getAttributes());
-            return new AdPrincipal((String)attributes.get(SCHEMA_ATTR_SAMACCOUNTNAME), resolveGroupNames((Set) attributes.get(SCHEMA_ATTR_MEMBEROF)), attributes);
+            return new AdPrincipal(
+                        (String)attributes.get(SCHEMA_ATTR_SAMACCOUNTNAME),
+                        AdUtilities.extractDNParticles((Set) attributes.get(SCHEMA_ATTR_MEMBEROF), "cn"),
+                        attributes);
         } catch (NamingException e) {
             throw new AuthenticationException("User search failed. Configuration error?", e);
         }
     }
 
-    private Set<String> resolveGroupNames(Set<String> groupDNs){
+    private Set<String> extractGroupNames(Set<String> groupDNs){
         Set<String> result = new HashSet<>();
         for(String groupDn : groupDNs){
             result.add(groupDn.substring(groupDn.indexOf('=') + 1, groupDn.indexOf(',')));
