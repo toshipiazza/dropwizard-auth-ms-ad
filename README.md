@@ -30,7 +30,7 @@ The aim of this project is to minimize the amount of required configuration. The
         domain: my.company.example.com
 
 Several additional properties can be configured, but sensible defaults should prevent you from ever needing to change them
-
+```yaml
     ad:
         domain: my.company.example.com  # No Default
         domainController: my-fav-dc.my.company.example.com # Default: <domain>
@@ -41,6 +41,8 @@ Several additional properties can be configured, but sensible defaults should pr
             - sAMAccountName
             - memberOf
             - mail
+        connectionTimeout: 1000 # Default: as shown in millseconds
+        readTimeout: 1000 # Default: as shown in millseconds
         requiredGroups: # Default: <empty>
             - All
             - Of
@@ -52,6 +54,7 @@ Several additional properties can be configured, but sensible defaults should pr
             - Get
             - A
             - 403
+```
 
 ## OK, that's cool, how about...
 

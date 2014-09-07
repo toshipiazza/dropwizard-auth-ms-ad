@@ -17,10 +17,22 @@ public class AdConfiguration {
     //Do nothing, Simply return the full DN returned as the memberOf attribute
     public static final int NOOP_GROUP_RESOLV=0;
 
+    public static final int DEFAULT_CONN_TIMEOUT = 1000;
+    public static final int DEFAULT_READ_TIMEOUT = 1000;
+
+
     @NotNull
     @Valid
     private String domain;
     private String domainController;
+
+    @NotNull
+    @Valid
+    private int readTimeout = DEFAULT_READ_TIMEOUT;
+    @NotNull
+    @Valid
+    private int connectionTimeout = DEFAULT_CONN_TIMEOUT;
+
 
     @NotNull
     @Valid
@@ -104,5 +116,21 @@ public class AdConfiguration {
 
     public String getLdapUrl() {
         return String.format("%s://%s", (sslEnabled?"ldaps":"ldap"),  getDomainController());
+    }
+
+    public int getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+    }
+
+    public int getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
     }
 }

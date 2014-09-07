@@ -105,6 +105,9 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
     private DirContext bindUser(BasicCredentials credentials) throws AuthenticationException{
         Properties properties = new Properties();
         properties.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+        //See: http://docs.oracle.com/javase/jndi/tutorial/ldap/connect/create.html#TIMEOUT
+        properties.put("com.sun.jndi.ldap.read.timeout", configuration.getReadTimeout()+"");  // How long to wait for a read response
+        properties.put("com.sun.jndi.ldap.connect.timeout", configuration.getConnectionTimeout()+"");  // How long to wait for a network connection
         properties.put(Context.PROVIDER_URL, configuration.getLdapUrl());
         if(credentials.getUsername().contains("@")){
             properties.put(Context.SECURITY_PRINCIPAL, credentials.getUsername());
