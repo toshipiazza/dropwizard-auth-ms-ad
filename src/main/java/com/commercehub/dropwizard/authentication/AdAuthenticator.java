@@ -19,6 +19,8 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import java.util.*;
 
+import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_MEMBEROF;
+import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_SAMACCOUNTNAME;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
@@ -80,7 +82,7 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
             }
 
             Map<String, Object> attributes = AdUtilities.simplify(userResult.getAttributes());
-            return new AdPrincipal((String)attributes.get("samaccountname"), resolveGroupNames(boundContext, (Set) attributes.get("memberof")), attributes);
+            return new AdPrincipal((String)attributes.get(SCHEMA_ATTR_SAMACCOUNTNAME), resolveGroupNames(boundContext, (Set) attributes.get(SCHEMA_ATTR_MEMBEROF)), attributes);
         } catch (NamingException e) {
             throw new AuthenticationException("User search failed. Configuration error?", e);
         }

@@ -9,6 +9,9 @@ import javax.naming.directory.Attributes;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_MAIL_LC;
+import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_MEMBEROF_LC;
+
 public class AdUtilities {
 
     /**
@@ -33,9 +36,9 @@ public class AdUtilities {
             while(attrs.hasMore()){
                 Attribute a = attrs.next();
                 Object val;
-                if(a.getID().toLowerCase().equals("mail")){
+                if(a.getID().toLowerCase().equals(SCHEMA_ATTR_MAIL_LC)){
                     val = a.get(0);
-                } else if (a.size()>1 || a.getID().toLowerCase().equals("memberof")){
+                } else if (a.size()>1 || a.getID().toLowerCase().equals(SCHEMA_ATTR_MEMBEROF_LC)){
                     Set valSet = new HashSet();
                     for(int i =0; i< a.size(); i++){
                         valSet.add(a.get(i));
