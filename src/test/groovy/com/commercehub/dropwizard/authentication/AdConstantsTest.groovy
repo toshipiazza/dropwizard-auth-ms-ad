@@ -11,7 +11,7 @@ public class AdConstantsTest {
     void checkForHumanErrorOnConstantsMaintainence(){
         ["userPrincipalName", "mail", "sAMAccountName", "memberOf"].each{
             assertEquals("Did not find a suitable attribute for $it in ${AdConstants.class.simpleName}", it, AdConstants["SCHEMA_ATTR_${it.toUpperCase()}"] )
-            assertEquals("Did not find a suitable lowercase attribute for $it in ${AdConstants.class.simpleName}", it.toUpperCase(), AdConstants["SCHEMA_ATTR_${it.toUpperCase()}_LC"] )
+            assertEquals("Did not find a suitable lowercase attribute for $it in ${AdConstants.class.simpleName}", it.toLowerCase(), AdConstants["SCHEMA_ATTR_${it.toUpperCase()}_LC"] )
         }
     }
 
