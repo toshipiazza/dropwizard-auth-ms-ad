@@ -35,7 +35,6 @@ Several additional properties can be configured, but sensible defaults should pr
         domain: my.company.example.com  # No Default
         domainController: my-fav-dc.my.company.example.com # Default: <domain>
         sslEnabled: true  # Default: true
-        groupResolutionMode: 1 # 0(DN) , 1(CN), or 2(sAMAccountName - EXPENSIVE). Default: 1
         usernameFilterTemplate: (&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s)) # Default: <As shown> %s replaced with the sAMAccountName
         attributeNames: # Default: <As Shown>. first two are required.
             - sAMAccountName
@@ -63,7 +62,8 @@ Several additional properties can be configured, but sensible defaults should pr
 * ...configuring the required group at the Resource level?
 * Wonderful idea. If you get to it before us, please be sure to contribute your work.
 * ...using nested groups in AD
-* Right on! But it seems that resolving even the known groups from the memberOf attribute is very slow. Change the *groupResolutionMode* to 2 and see how slow.
+* Right on! But it seems that resolving even the known groups from the memberOf attribute is very slow. I am sure there
+is a clever highly performant way to do it, find it and let us know.
 * ...AD has this really cool feature that allows you to do X with Y!
 * meh.
 

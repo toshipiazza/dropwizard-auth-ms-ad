@@ -8,15 +8,6 @@ import java.util.Set;
 
 public class AdConfiguration {
 
-    //Simply use the CN of the group as the role name.
-    public static final int TRIVIAL_GROUP_RESOLV=1;
-
-    //Resolve the group dn to the sAMAccount name for the group
-    public static final int LOOKUP_GROUP_RESOLV=2;
-
-    //Do nothing, Simply return the full DN returned as the memberOf attribute
-    public static final int NOOP_GROUP_RESOLV=0;
-
     public static final int DEFAULT_CONN_TIMEOUT = 1000;
     public static final int DEFAULT_READ_TIMEOUT = 1000;
 
@@ -37,7 +28,7 @@ public class AdConfiguration {
     @NotNull
     @Valid
     private String usernameFilterTemplate = "(&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s))";
-    private int groupResolutionMode = TRIVIAL_GROUP_RESOLV;
+
     private String[] attributeNames = new String[]{"sAMAccountName", "mail", "memberOf"};
     private boolean sslEnabled = true;
 
@@ -67,14 +58,6 @@ public class AdConfiguration {
 
     public void setUsernameFilterTemplate(String usernameFilterTemplate) {
         this.usernameFilterTemplate = usernameFilterTemplate;
-    }
-
-    public int getGroupResolutionMode() {
-        return groupResolutionMode;
-    }
-
-    public void setGroupResolutionMode(int groupResolutionMode) {
-        this.groupResolutionMode = groupResolutionMode;
     }
 
     public String getDomainBase() {

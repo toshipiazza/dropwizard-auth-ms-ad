@@ -14,5 +14,4 @@ public class AdConstantsTest {
             assertEquals("Did not find a suitable lowercase attribute for $it in ${AdConstants.class.simpleName}", it.toLowerCase(), AdConstants["SCHEMA_ATTR_${it.toUpperCase()}_LC"] )
         }
     }
-
 }

@@ -1,8 +1,5 @@
 package com.commercehub.dropwizard.authentication;
 
-import com.commercehub.dropwizard.authentication.groups.LookupGroupResolverStrategy;
-import com.commercehub.dropwizard.authentication.groups.NoOpGroupResolverStrategy;
-import com.commercehub.dropwizard.authentication.groups.TrivialGroupResolverStrategy;
 import com.google.common.base.Optional;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
@@ -82,27 +79,19 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
             }
 
             Map<String, Object> attributes = AdUtilities.simplify(userResult.getAttributes());
-            return new AdPrincipal((String)attributes.get(SCHEMA_ATTR_SAMACCOUNTNAME), resolveGroupNames(boundContext, (Set) attributes.get(SCHEMA_ATTR_MEMBEROF)), attributes);
+            return new AdPrincipal((String)attributes.get(SCHEMA_ATTR_SAMACCOUNTNAME), resolveGroupNames((Set) attributes.get(SCHEMA_ATTR_MEMBEROF)), attributes);
         } catch (NamingException e) {
             throw new AuthenticationException("User search failed. Configuration error?", e);
         }
     }
 
-    private Set<String> resolveGroupNames(DirContext boundContext, Set<String> groupDNs){
-        switch(configuration.getGroupResolutionMode()){
-            case AdConfiguration.NOOP_GROUP_RESOLV:
-                return new NoOpGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
-            case AdConfiguration.TRIVIAL_GROUP_RESOLV:
-                return new TrivialGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
-            case AdConfiguration.LOOKUP_GROUP_RESOLV:
-                return new LookupGroupResolverStrategy().resolveGroups(boundContext, groupDNs);
-            default:
-                throw new RuntimeException("No matching group resolution strategy found");
+    private Set<String> resolveGroupNames(Set<String> groupDNs){
+        Set<String> result = new HashSet<>();
+        for(String groupDn : groupDNs){
+            result.add(groupDn.substring(groupDn.indexOf('=') + 1, groupDn.indexOf(',')));
         }
-
+        return result;
     }
-
-
 
 
     private DirContext bindUser(AdCredentials credentials) throws AuthenticationException{
@@ -114,7 +103,7 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
         properties.put(Context.PROVIDER_URL, configuration.getLdapUrl());
         properties.put(Context.SECURITY_PRINCIPAL, credentials.getUserPrincipalName(configuration.getDomain()));
         properties.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
-        properties.put(Context.REFERRAL, configuration.getGroupResolutionMode()==AdConfiguration.LOOKUP_GROUP_RESOLV?"follow":"ignore");
+        properties.put(Context.REFERRAL, "ignore");
         try {
             return new InitialDirContext(properties);
         } catch (javax.naming.AuthenticationException e) {
