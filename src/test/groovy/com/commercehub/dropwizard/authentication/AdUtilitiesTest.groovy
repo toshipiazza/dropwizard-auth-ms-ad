@@ -29,7 +29,6 @@ public class AdUtilitiesTest {
         assertEquals("Hit-miss case should have returned empty Set", [] as Set, AdUtilities.extractDNParticles([dn], "jo"));
     }
 
-    @Ignore  //could not extract u expected:<t[hree]> but was:<t[wo]>
     @Test
     public void falseHit(){
         //@ToDo this case should be handled correctly

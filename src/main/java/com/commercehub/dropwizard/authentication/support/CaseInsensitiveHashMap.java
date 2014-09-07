@@ -1,7 +1,6 @@
 package com.commercehub.dropwizard.authentication.support;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Simple extension to {@link java.util.HashMap} which does not enforce case sensitivity
