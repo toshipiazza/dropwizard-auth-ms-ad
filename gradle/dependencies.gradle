@@ -1,0 +1,5 @@
+ext {
+    commonVersions = [
+            dropwizard: "0.7.0"
+    ]
+}

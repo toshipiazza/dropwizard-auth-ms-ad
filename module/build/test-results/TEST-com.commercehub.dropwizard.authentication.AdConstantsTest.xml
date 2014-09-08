@@ -1,0 +1,7 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.commercehub.dropwizard.authentication.AdConstantsTest" tests="1" failures="0" errors="0" timestamp="2014-09-08T13:22:25" hostname="mac-bs-gh.nexus.commercehub.com" time="0.055">
+  <properties/>
+  <testcase name="checkForHumanErrorOnConstantsMaintainence" classname="com.commercehub.dropwizard.authentication.AdConstantsTest" time="0.055"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

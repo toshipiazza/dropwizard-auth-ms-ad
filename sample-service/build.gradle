@@ -1,0 +1,14 @@
+apply plugin: "application"
+
+dependencies {
+    compile project(":module")
+}
+
+mainClassName = "com.example.helloworld.HelloWorldApplication"
+
+run {
+
+    if(project.hasProperty('dwArgs')){
+        args(dwArgs.split(','))
+    }
+}
