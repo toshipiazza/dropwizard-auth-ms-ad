@@ -55,6 +55,15 @@ Several additional properties can be configured, but sensible defaults should pr
             - 403
 ```
 
+## Sample Service
+This project includes a sample dropwazard service. Simply clone the repo, update sample-service/config/dev.yaml to
+point to your domain then run
+
+    ./gradlew run -PdwArgs='server,config/dev.yaml' -Ddw.ad.domain=nexus.commercehub.com
+
+Then hit http://localhost:8080/protected and provide your username and password.
+
+
 ## OK, that's cool, how about...
 
 * ...using another cool LDAP library?

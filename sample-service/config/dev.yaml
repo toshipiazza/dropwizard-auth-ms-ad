@@ -39,5 +39,5 @@ logging:
     - type: console
 
 ad:
-  domain: your.domain.tld
+  domain: my.company.example.com
 
