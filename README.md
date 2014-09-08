@@ -9,7 +9,44 @@ You should consult your IT administrator before you bury her carefully size AD c
 interactions with AD; DropWizard provides CachingAuthenticator to help you with this.
 
 ## Maven (etc.)
-Currently this module is in alpha and not available from any public maven repository. We will publish to to JCenter soon.
+
+Maven
+
+```xml
+
+   ...
+   <repositories>
+       <repository>
+         <id>jcenter</id>
+         <url>http://jcenter.bintray.com</url>
+       </repository>
+     </repositories>
+
+   ...
+
+   <dependency>
+       <groupId>com.commercehub.dropwizard</groupId>
+       <artifactId>dropwizard-auth-active-directory</artifactId>
+       <version>0.2.1</version>
+   </dependency>
+```
+Gradle
+
+```groovy
+
+    ...
+    repositories {
+        jcenter()
+    }
+
+    ...
+    dependencies {
+        ...
+        compile(group: 'com.commercehub.dropwizard', name: 'dropwizard-auth-active-directory', version: '0.2.1', ext: 'jar')
+        ...
+    }
+
+```
 
 ## Usages
 Example usage
