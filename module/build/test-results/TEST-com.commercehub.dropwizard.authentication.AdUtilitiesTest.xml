@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="com.commercehub.dropwizard.authentication.AdUtilitiesTest" tests="4" failures="0" errors="0" timestamp="2014-09-08T13:22:25" hostname="mac-bs-gh.nexus.commercehub.com" time="0.008">
+<testsuite name="com.commercehub.dropwizard.authentication.AdUtilitiesTest" tests="4" failures="0" errors="0" timestamp="2014-09-08T13:33:19" hostname="mac-bs-gh.nexus.commercehub.com" time="0.009">
   <properties/>
-  <testcase name="dnParticleExtraction" classname="com.commercehub.dropwizard.authentication.AdUtilitiesTest" time="0.005"/>
+  <testcase name="dnParticleExtraction" classname="com.commercehub.dropwizard.authentication.AdUtilitiesTest" time="0.006"/>
   <testcase name="dnParticlesExtraction" classname="com.commercehub.dropwizard.authentication.AdUtilitiesTest" time="0.002"/>
   <testcase name="checkMisses" classname="com.commercehub.dropwizard.authentication.AdUtilitiesTest" time="0.0"/>
   <testcase name="falseHit" classname="com.commercehub.dropwizard.authentication.AdUtilitiesTest" time="0.0"/>
