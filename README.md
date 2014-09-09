@@ -1,4 +1,6 @@
-# DropWizard ActiveDirectory Authentication Provider [![Build Status](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad.svg?branch=master)](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad)
+# DropWizard ActiveDirectory Authentication Provider
+
+## Introduction [![Build Status](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad.svg?branch=master)](https://travis-ci.org/commercehub-oss/dropwizard-auth-ms-ad)
 This BasicAuth provider uses the ActiveDirectory LDAP interface to authenticate and authorize your service principals.
 Existing LDAP providers can provide you the same capabilities as this Authenticator but this authenticator should require
 much less configuration and can take advantage of typical behaviors used in activeDirectory deployments.
@@ -8,9 +10,11 @@ This project is only in use for internal projects at CommerceHub. You should be 
 You should consult your IT administrator before you bury her carefully size AD cluster with new auth requests. You *SHOULD* cache your
 interactions with AD; DropWizard provides CachingAuthenticator to help you with this.
 
-## Maven (etc.)
+## Maven (etc.) [ ![Download](https://api.bintray.com/packages/commercehub-oss/main/dropwizard-auth-active-directory/images/download.png) ](https://bintray.com/commercehub-oss/main/dropwizard-auth-active-directory/_latestVersion)
 
 Maven
+
+
 
 ```xml
 
