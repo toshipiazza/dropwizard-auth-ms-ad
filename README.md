@@ -46,7 +46,10 @@ Gradle
     ...
     dependencies {
         ...
-        compile(group: 'com.commercehub.dropwizard', name: 'dropwizard-auth-active-directory', version: '0.2.1', ext: 'jar')
+        compile(group: 'com.commercehub.dropwizard', 
+        name: 'dropwizard-auth-active-directory', 
+        version: '0.2.3', 
+        ext: 'jar')
         ...
     }
 
