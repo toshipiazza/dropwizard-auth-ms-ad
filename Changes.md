@@ -4,8 +4,8 @@
 
 * Initial public release. 
 
-# 0.2.3
+# 0.2.3 (2014-09-18)
 
-* Improvemement to the AdPrincipal model include generic type info; helps swagger integration.
+* Improvemement to the AdPrincipal model to include generic type info; helps swagger integration.
 
 
