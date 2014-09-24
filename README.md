@@ -31,7 +31,7 @@ Maven
    <dependency>
        <groupId>com.commercehub.dropwizard</groupId>
        <artifactId>dropwizard-auth-active-directory</artifactId>
-       <version>0.2.1</version>
+       <version>0.2.3</version>
    </dependency>
 ```
 Gradle
