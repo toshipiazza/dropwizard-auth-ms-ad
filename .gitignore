@@ -1,6 +1,6 @@
 # Gradle files
 .gradle
-build
+module/build
 
 *.class
 *.bin
