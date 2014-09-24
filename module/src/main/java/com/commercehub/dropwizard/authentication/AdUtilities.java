@@ -60,8 +60,10 @@ public class AdUtilities {
     public static String extractDNParticle(String dn, String particle){
 
         for(String part: dn.split(",")){
-            if(part.startsWith(particle+"=")){
-                return part.substring(part.indexOf(particle + "=") + (particle.length()+1)).trim();
+            String upperPart = part.toUpperCase();
+            String upperParticle = particle.toUpperCase();
+            if(upperPart.startsWith(upperParticle+"=")){
+                return part.substring(upperPart.indexOf(upperParticle + "=") + (upperParticle.length()+1)).trim( );
 
             }
         }

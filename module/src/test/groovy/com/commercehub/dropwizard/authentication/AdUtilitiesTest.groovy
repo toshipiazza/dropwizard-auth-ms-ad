@@ -15,6 +15,15 @@ public class AdUtilitiesTest {
         assertEquals("could not extract dc", 'commercehub', AdUtilities.extractDNParticle(dn, "dc"));
     }
 
+
+    @Test
+    public void dnCaseInsensitiveParticleExtraction()  {
+        def dn = "CN=one,OU= two ,DC=commercehub,DC=com"
+        assertEquals("could not extract cn", 'one', AdUtilities.extractDNParticle(dn, "cn"));
+        assertEquals("could not extract ou", 'two', AdUtilities.extractDNParticle(dn, "ou"));
+        assertEquals("could not extract dc", 'commercehub', AdUtilities.extractDNParticle(dn, "dc"));
+    }
+
     @Test
     public void dnParticlesExtraction()  {
         //This list has purposefully messy examples

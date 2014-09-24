@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="com.commercehub.dropwizard.authentication.AdConfigurationTest" tests="1" failures="0" errors="0" timestamp="2014-09-18T19:18:59" hostname="MAC-BS-GH.local" time="0.109">
+<testsuite name="com.commercehub.dropwizard.authentication.AdConfigurationTest" tests="1" failures="0" errors="0" timestamp="2014-09-24T15:02:23" hostname="MAC-BS-GH.local" time="0.108">
   <properties/>
-  <testcase name="checkTimeouts" classname="com.commercehub.dropwizard.authentication.AdConfigurationTest" time="0.109"/>
+  <testcase name="checkTimeouts" classname="com.commercehub.dropwizard.authentication.AdConfigurationTest" time="0.108"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
