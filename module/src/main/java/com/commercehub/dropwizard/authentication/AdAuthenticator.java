@@ -110,7 +110,7 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
         try {
             return new InitialDirContext(properties);
         } catch (javax.naming.AuthenticationException e) {
-            LOG.warn(String.format("User: %s failed to authenticate. Bad Credentials", credentials.getUsername()));
+            LOG.warn(String.format("User: %s failed to authenticate. Bad Credentials", credentials.getUsername()), e);
             return null;
         } catch (NamingException e) {
             throw new AuthenticationException("Could not bind with AD", e);
