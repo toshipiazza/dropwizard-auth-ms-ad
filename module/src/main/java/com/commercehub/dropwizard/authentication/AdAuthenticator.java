@@ -75,7 +75,7 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
             SearchResult userResult = results.hasMoreElements() ? results.next() : null;
 
             if(userResult==null || results.hasMoreElements()){
-                throw new AuthenticationException(String.format("Inconsistent search search for %s. Bind succeeded but post bind lookup failed. Assumptions/logic failed?", credentials.getUsername()));
+                throw new AuthenticationException(String.format("Inconsistent search for %s. Bind succeeded but post bind lookup failed. Assumptions/logic failed?", credentials.getUsername()));
             }
 
             Map<String, Object> attributes = AdUtilities.simplify(userResult.getAttributes());
