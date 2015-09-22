@@ -1,6 +1,8 @@
 package com.commercehub.dropwizard.authentication;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
+import com.google.common.collect.ObjectArrays;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
@@ -70,7 +72,12 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
         try {
             SearchControls searchCtls = new SearchControls();
             searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            searchCtls.setReturningAttributes(configuration.getAttributeNames());
+            String[] attributeNames = ObjectArrays.concat(
+                    configuration.getAttributeNames(),
+                    configuration.getBinaryAttributeNames(),
+                    String.class
+            );
+            searchCtls.setReturningAttributes(attributeNames);
             NamingEnumeration<SearchResult> results = boundContext.search(configuration.getDomainBase(), String.format(configuration.getUsernameFilterTemplate(), credentials.getsAMAccountName()), searchCtls);
             SearchResult userResult = results.hasMoreElements() ? results.next() : null;
 
@@ -107,6 +114,9 @@ public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
         properties.put(Context.SECURITY_PRINCIPAL, credentials.getUserPrincipalName(configuration.getDomain()));
         properties.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
         properties.put(Context.REFERRAL, "ignore");
+        if(configuration.getBinaryAttributeNames().length > 0) {
+            properties.put("java.naming.ldap.attributes.binary", Joiner.on(" ").join(configuration.getBinaryAttributeNames()));
+        }
         try {
             return new InitialDirContext(properties);
         } catch (javax.naming.AuthenticationException e) {

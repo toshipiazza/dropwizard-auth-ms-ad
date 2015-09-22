@@ -30,6 +30,14 @@ public class AdConfiguration {
     private String usernameFilterTemplate = "(&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s))";
 
     private String[] attributeNames = new String[]{"sAMAccountName", "mail", "memberOf"};
+
+    /**
+     * LDAP/AD keys whose values are expected to be binary.
+     *
+     * All these will be returned as byte[] instead of Strings. Typical examples would be "objectGUID" or "objectSid".
+     */
+    private String[] binaryAttributeNames;
+
     private boolean sslEnabled = true;
 
     @NotNull
@@ -95,6 +103,14 @@ public class AdConfiguration {
 
     public String[] getAttributeNames() {
         return attributeNames;
+    }
+
+    public String[] getBinaryAttributeNames() {
+        return binaryAttributeNames;
+    }
+
+    public void setBinaryAttributeNames(String[] binaryAttributeNames) {
+        this.binaryAttributeNames = binaryAttributeNames;
     }
 
     public String getLdapUrl() {

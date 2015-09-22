@@ -75,10 +75,13 @@ Several additional properties can be configured, but sensible defaults should pr
         domainController: my-fav-dc.my.company.example.com # Default: <domain>
         sslEnabled: true  # Default: true
         usernameFilterTemplate: (&((&(objectCategory=Person)(objectClass=User)))(sAMAccountName=%s)) # Default: <As shown> %s replaced with the sAMAccountName
-        attributeNames: # Default: <As Shown>. first two are required.
+        attributeNames: # Default: <As Shown>. first two are required. Will be fetched as String.
             - sAMAccountName
             - memberOf
             - mail
+        binaryAttributeNames: # Default: empty. Will be fetched as byte[]. Need for the ones below.
+            - objectGUID
+            - objectSid
         connectionTimeout: 1000 # Default: as shown in millseconds
         readTimeout: 1000 # Default: as shown in millseconds
         requiredGroups: # Default: <empty>
