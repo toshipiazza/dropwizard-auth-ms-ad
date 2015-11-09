@@ -12,6 +12,9 @@ interactions with ActiveDirectory; DropWizard provides CachingAuthenticator to h
 
 ## Maven (etc.) [ ![Download](https://api.bintray.com/packages/commercehub-oss/main/dropwizard-auth-active-directory/images/download.png) ](https://bintray.com/commercehub-oss/main/dropwizard-auth-active-directory/_latestVersion)
 
+*NOTE*: When I used this I had to override the version of javassist to 3.20.0-GA in order to make this Java 8 compatible.
+```Gradle syntax: 'org.javassist:javassist:3.20.0-GA'```
+
 Maven
 
 ```xml
@@ -98,7 +101,7 @@ Several additional properties can be configured, but sensible defaults should pr
 ```
 
 ## Sample Service
-This project includes a sample dropwazard service. Simply clone the repo, update sample-service/config/dev.yaml to
+This project includes a sample dropwizard service. Simply clone the repo, update sample-service/config/dev.yaml to
 point to your domain then run
 
     ./gradlew run -PdwArgs='server,config/dev.yaml' -Ddw.ad.domain=nexus.commercehub.com
