@@ -1,6 +1,7 @@
 package com.commercehub.dropwizard.authentication;
 
 import com.commercehub.dropwizard.authentication.support.CaseInsensitiveHashMap;
+import org.apache.commons.lang.StringUtils;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -57,8 +58,10 @@ public class AdUtilities {
         return result;
     }
 
-    public static String extractDNParticle(String dn, String particle){
-
+    public static String extractDNParticle(String dn, String particle) {
+        if (StringUtils.isBlank(dn) || StringUtils.isBlank(particle)) {
+            return null;
+        }
         for(String part: dn.split(",")){
             String upperPart = part.toUpperCase();
             String upperParticle = particle.toUpperCase();
@@ -72,10 +75,12 @@ public class AdUtilities {
 
     public static Set<String> extractDNParticles(Collection<String> dnStrings, String particle){
         Set<String> result = new HashSet<>();
-        for(String dn: dnStrings){
-            String value = extractDNParticle(dn, particle);
-            if(null!=value){
-                result.add(value);
+        if (dnStrings != null) {
+            for (String dn : dnStrings) {
+                String value = extractDNParticle(dn, particle);
+                if (null != value) {
+                    result.add(value);
+                }
             }
         }
         return result;
