@@ -36,7 +36,8 @@ public class AdConfiguration {
      *
      * All these will be returned as byte[] instead of Strings. Typical examples would be "objectGUID" or "objectSid".
      */
-    private String[] binaryAttributeNames;
+    @NotNull
+    private String[] binaryAttributeNames = new String[0];
 
     private boolean sslEnabled = true;
 

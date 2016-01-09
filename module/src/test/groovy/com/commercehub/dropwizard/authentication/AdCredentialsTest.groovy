@@ -1,7 +1,7 @@
 package com.commercehub.dropwizard.authentication
 
-import io.dropwizard.auth.basic.BasicCredentials;
-import org.apache.commons.lang.RandomStringUtils;
+import io.dropwizard.auth.basic.BasicCredentials
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

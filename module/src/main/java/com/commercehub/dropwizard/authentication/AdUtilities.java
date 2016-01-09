@@ -1,7 +1,7 @@
 package com.commercehub.dropwizard.authentication;
 
 import com.commercehub.dropwizard.authentication.support.CaseInsensitiveHashMap;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;

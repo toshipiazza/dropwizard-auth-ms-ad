@@ -16,13 +16,14 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
+import java.security.Principal;
 import java.util.*;
 
 import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_MEMBEROF;
 import static com.commercehub.dropwizard.authentication.AdConstants.SCHEMA_ATTR_SAMACCOUNTNAME;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class AdAuthenticator<T> implements Authenticator<BasicCredentials, T> {
+public class AdAuthenticator<T extends Principal> implements Authenticator<BasicCredentials, T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(AdAuthenticator.class);
     private AdConfiguration configuration;

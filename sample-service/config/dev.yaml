@@ -41,3 +41,4 @@ logging:
 ad:
   domain: my.company.example.com
 
+authenticationCachePolicy: maximumSize=10000, expireAfterAccess=10m

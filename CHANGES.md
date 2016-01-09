@@ -1,3 +1,7 @@
+# 0.2.8
+
+* Upgrade to Dropwizard 9.1
+
 # 0.2.5 (2014-10-21)
 
 * Fix bug #12 Failure to log LDAP exception during authentication failure

@@ -3,9 +3,10 @@ package com.commercehub.dropwizard.authentication;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
+import java.security.Principal;
 import java.util.*;
 
-public class AdPrincipal {
+public class AdPrincipal implements Principal {
 
     private final String username;
     private final Set<String> groupNames;
@@ -32,5 +33,10 @@ public class AdPrincipal {
 
     public Map<String, Object> getRetrievedAttributes() {
         return ImmutableMap.copyOf(retrievedAttributes);
+    }
+
+    @Override
+    public String getName() {
+        return "AdPrincipal";
     }
 }

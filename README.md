@@ -8,7 +8,7 @@ much less configuration and can take advantage of typical behaviors used in Acti
 ## Before you continue
 This project is only in use for internal projects at CommerceHub. You should be familiar with the auth section of the DropWizard manual.
 You should consult your IT administrator before you bury her carefully size AD cluster with new auth requests. You *SHOULD* cache your
-interactions with ActiveDirectory; DropWizard provides CachingAuthenticator to help you with this.
+interactions with ActiveDirectory; DropWizard provides CachingAuthenticator to help you with this (see sample-service).
 
 ## Maven (etc.) [ ![Download](https://api.bintray.com/packages/commercehub-oss/main/dropwizard-auth-active-directory/images/download.png) ](https://bintray.com/commercehub-oss/main/dropwizard-auth-active-directory/_latestVersion)
 
@@ -47,7 +47,7 @@ Gradle
     ...
     dependencies {
         ...
-        compile 'com.commercehub.dropwizard:dropwizard-auth-active-directory:0.2.4'
+        compile 'com.commercehub.dropwizard:dropwizard-auth-active-directory:0.2.8'
         ...
     }
 
@@ -59,7 +59,13 @@ Example usage
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) throws ClassNotFoundException {
         ...
-        environment.jersey().register(new BasicAuthProvider<>(AdAuthenticator.createDefault(configuration.getAdConfiguration()), "MSAD"));
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<AdPrincipal>()
+                    .setAuthenticator(AdAuthenticator.createDefault(configuration.getAdConfiguration()))
+                    .setRealm("MSAD")
+                    .buildAuthFilter()));
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(AdPrincipal.class));
         ...
         environment.jersey().register(new ProtectedResource());
 
