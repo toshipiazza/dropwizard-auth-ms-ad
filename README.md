@@ -10,6 +10,9 @@ This project is only in use for internal projects at CommerceHub. You should be 
 You should consult your IT administrator before you bury her carefully size AD cluster with new auth requests. You *SHOULD* cache your
 interactions with ActiveDirectory; DropWizard provides CachingAuthenticator to help you with this (see sample-service).
 
+Please also note that version 0.2.x of dropwizard-auth-ms-md is compatible with dropwizard 0.7 and 0.8. The 0.3.x version is compatible with
+dropwizard 0.9.x.
+
 ## Maven (etc.) [ ![Download](https://api.bintray.com/packages/commercehub-oss/main/dropwizard-auth-active-directory/images/download.png) ](https://bintray.com/commercehub-oss/main/dropwizard-auth-active-directory/_latestVersion)
 
 *NOTE*: When I used this I had to override the version of javassist to 3.20.0-GA in order to make this Java 8 compatible.
@@ -32,7 +35,7 @@ Maven
    <dependency>
        <groupId>com.commercehub.dropwizard</groupId>
        <artifactId>dropwizard-auth-active-directory</artifactId>
-       <version>0.2.8</version>
+       <version>0.3.0</version>
    </dependency>
 ```
 Gradle
@@ -47,7 +50,8 @@ Gradle
     ...
     dependencies {
         ...
-        compile 'com.commercehub.dropwizard:dropwizard-auth-active-directory:0.2.8'
+        // for dropwizard 0.7.x, change the version to 0.2.7
+        compile 'com.commercehub.dropwizard:dropwizard-auth-active-directory:0.3.0'
         ...
     }
 
@@ -59,6 +63,7 @@ Example usage
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) throws ClassNotFoundException {
         ...
+        // dropwizard 0.9.x
         environment.jersey().register(new AuthDynamicFeature(
                 new BasicCredentialAuthFilter.Builder<AdPrincipal>()
                     .setAuthenticator(AdAuthenticator.createDefault(configuration.getAdConfiguration()))
@@ -66,6 +71,9 @@ Example usage
                     .buildAuthFilter()));
         environment.jersey().register(RolesAllowedDynamicFeature.class);
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(AdPrincipal.class));
+
+        // dropwizard 0.7.x
+        environment.jersey().register(new BasicAuthProvider<>(AdAuthenticator.createDefault(configuration.getAdConfiguration()), "MSAD"));
         ...
         environment.jersey().register(new ProtectedResource());
 
